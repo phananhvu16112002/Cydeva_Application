@@ -16,6 +16,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   String title = 'Welcome Back! Glad to see you, Again!';
+  final _formKey = GlobalKey<FormState>();
   TextEditingController phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -26,127 +27,138 @@ class _WelcomePageState extends State<WelcomePage> {
           height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 80,
-                ),
-                cusTomText(title, 32, FontWeight.w700, AppColors.primaryText),
-                const SizedBox(
-                  height: 16,
-                ),
-                const CustomText(
-                    message: 'Enter your phone number',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primaryText),
-                const SizedBox(
-                  height: 4,
-                ),
-                CustomTextField(
-                  controller: phoneNumberController,
-                  textInputType: TextInputType.phone,
-                  obscureText: false,
-                  suffixIcon:
-                      const IconButton(onPressed: null, icon: Icon(null)),
-                  hintText: 'Phone Number',
-                  prefixIcon: const Icon(null),
-                  readOnly: false,
-                  width: double.infinity,
-                  height: 56,
-                  colorHintText: AppColors.neutral05,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                CustomButton(
-                    buttonName: 'Login',
-                    backgroundColorButton: AppColors.primaryButton,
-                    borderColor: Colors.white,
-                    textColor: Colors.white,
-                    function: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => const OTPPage()));
-                    },
-                    height: 52,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 80,
+                  ),
+                  cusTomText(title, 32, FontWeight.w700, AppColors.primaryText),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const CustomText(
+                      message: 'Enter your phone number',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primaryText),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  CustomTextField(
+                    controller: phoneNumberController,
+                    textInputType: TextInputType.phone,
+                    obscureText: false,
+                    suffixIcon:
+                        const IconButton(onPressed: null, icon: Icon(null)),
+                    hintText: 'Phone Number',
+                    prefixIcon: const Icon(null),
+                    readOnly: false,
                     width: double.infinity,
-                    fontSize: 16,
-                    colorShadow: Colors.transparent),
-                const SizedBox(
-                  height: 32,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 1,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.neutral04)),
+                    height: 56,
+                    colorHintText: AppColors.neutral05,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Phone number is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  CustomButton(
+                      buttonName: 'Login',
+                      backgroundColorButton: AppColors.primaryButton,
+                      borderColor: Colors.white,
+                      textColor: Colors.white,
+                      function: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => const OTPPage()));
+                        }
+                      },
+                      height: 52,
+                      width: double.infinity,
+                      fontSize: 16,
+                      colorShadow: Colors.transparent),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 1,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.neutral04)),
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    const CustomText(
-                        message: 'Or Login with',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.secondaryText),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 1,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.neutral04)),
+                      const SizedBox(
+                        width: 12,
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 28,
-                ),
-                Row(
-                  children: [
-                    customThirdParty('facebook'),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    customThirdParty('Google'),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    customThirdParty('apple'),
-                  ],
-                ),
-                const SizedBox(
-                  height: 234,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CustomText(
-                        message: "Don't have an account? ",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.secondaryText),
-                    InkWell(
-                      onTap: () {},
-                      child: const CustomText(
-                          message: 'Register Now',
+                      const CustomText(
+                          message: 'Or Login with',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.secondaryText),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 1,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.neutral04)),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 28,
+                  ),
+                  Row(
+                    children: [
+                      customThirdParty('facebook'),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      customThirdParty('Google'),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      customThirdParty('apple'),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 234,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const CustomText(
+                          message: "Don't have an account? ",
                           fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.primaryButton),
-                    )
-                  ],
-                )
-              ],
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.secondaryText),
+                      InkWell(
+                        onTap: () {},
+                        child: const CustomText(
+                            message: 'Register Now',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.primaryButton),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ));
