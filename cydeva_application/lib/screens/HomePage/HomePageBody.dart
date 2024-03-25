@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cydeva_application/common/Colors/AppColors.dart';
 import 'package:cydeva_application/common/bases/CustomText.dart';
 import 'package:cydeva_application/common/bases/CustomTextField.dart';
@@ -13,6 +14,11 @@ class HomePageBody extends StatefulWidget {
 
 class _HomePageBodyState extends State<HomePageBody> {
   TextEditingController searchController = TextEditingController();
+  List<String> imageUrls = [
+    'assets/images/image.png',
+    'assets/images/image2.png',
+    'assets/images/image3.png',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,71 +73,87 @@ class _HomePageBodyState extends State<HomePageBody> {
                   )
                 ],
               ),
-              Container(
-                width: 250,
-                height: 285,
-                decoration: const BoxDecoration(
-                    color: AppColors.primary3,
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/image.png',
-                        width: 220,
-                        height: 190,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const CustomText(
-                          message: 'Himalayaa mountain peak',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.colorText),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/location.svg',
-                            fit: BoxFit.none,
-                          ),
-                          const SizedBox(
-                            width: 2,
-                          ),
-                          const CustomText(
-                              message: 'Himalayan',
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.colorText)
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/start.svg',
-                            fit: BoxFit.none,
-                          ),
-                          const SizedBox(
-                            width: 2,
-                          ),
-                          const CustomText(
-                              message: '4.5  ',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.colorText)
-                        ],
-                      )
-                    ],
-                  ),
+              const SizedBox(
+                height: 16,
+              ),
+              CarouselSlider(
+                options: CarouselOptions(
+                  aspectRatio: 16 / 13,
+                  viewportFraction: 0.7,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  // autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
                 ),
-              )
+                items: imageUrls.map((e) {
+                  return Container(
+                    width: 250,
+                    height: 300,
+                    decoration: const BoxDecoration(
+                      color: AppColors.primary3,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            e,
+                            width: 220,
+                            height: 190,
+                            fit: BoxFit.cover, // Đảm bảo hình ảnh không bị cắt
+                          ),
+                          SizedBox(height: 16),
+                          const CustomText(
+                            message: 'Himalayaa mountain peak',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.colorText,
+                          ),
+                          SizedBox(height: 2),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/location.svg',
+                                fit: BoxFit.none,
+                              ),
+                              SizedBox(width: 2),
+                              const CustomText(
+                                message: 'Himalayan',
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.colorText,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 2),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/star.svg',
+                                fit: BoxFit.none,
+                              ),
+                              SizedBox(width: 2),
+                              const CustomText(
+                                message: '4.5  ',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.colorText,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
             ],
           ),
         ));
