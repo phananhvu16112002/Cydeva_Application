@@ -107,7 +107,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                             e,
                             width: 220,
                             height: 190,
-                            fit: BoxFit.cover, // Đảm bảo hình ảnh không bị cắt
+                            fit: BoxFit.cover,
                           ),
                           SizedBox(height: 16),
                           const CustomText(
