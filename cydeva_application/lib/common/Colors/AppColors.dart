@@ -16,4 +16,5 @@ class AppColors {
   static const Color neutralWhite = Color(0xffFFFFFF);
   static const Color neutral02 = Color(0xffEDF2F7);
   static const Color colorText = Color(0xffECF9F9);
+  static const Color neutral08 = Color(0xff2D3748);
 }

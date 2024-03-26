@@ -29,17 +29,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        // backgroundColor: AppColors.backGroundColor,
+        backgroundColor: AppColors.backGroundColor,
         floatingActionButton: FloatingActionButton(
-          backgroundColor: AppColors.backGroundColor,
-          shape: const CircleBorder(),
+          backgroundColor: Colors.white,
+          isExtended: true,
+          shape: const CircleBorder(eccentricity: 0.9),
           elevation: 1,
           onPressed: () {},
           child: Image.asset(
             'assets/images/Splash.png',
             width: 65,
             height: 55,
+            fit: BoxFit.fill,
           ),
         ),
         floatingActionButtonLocation:
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             activeIndex: _bottomNavIndex,
             notchMargin: 8,
             gapLocation: GapLocation.center,
-            notchSmoothness: NotchSmoothness.verySmoothEdge,
+            notchSmoothness: NotchSmoothness.smoothEdge,
             backgroundColor: AppColors.neutralWhite,
             onTap: onTapHandler),
         body: _buildBody());

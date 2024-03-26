@@ -2,7 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cydeva_application/common/Colors/AppColors.dart';
 import 'package:cydeva_application/common/bases/CustomText.dart';
 import 'package:cydeva_application/common/bases/CustomTextField.dart';
+import 'package:cydeva_application/models/category_model.dart';
+import 'package:cydeva_application/models/guilde_model.dart';
+import 'package:cydeva_application/models/recommend_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePageBody extends StatefulWidget {
@@ -19,6 +23,46 @@ class _HomePageBodyState extends State<HomePageBody> {
     'assets/images/image2.png',
     'assets/images/image3.png',
   ];
+
+  List<GuideModel> listGuideModel = [
+    GuideModel(
+        title: 'Enjoy your trip',
+        description: 'Tips to help you have memory',
+        imgPath: 'guide'),
+    GuideModel(
+        title: 'Tool preparation',
+        description: 'What tools you need to prep',
+        imgPath: 'guide3'),
+    GuideModel(
+        title: 'Travel articles',
+        description: 'Tips to help you have memoryasdasdasdasdsadadasdas',
+        imgPath: 'guide4'),
+    GuideModel(title: '', description: '', imgPath: 'guide2'),
+  ];
+
+  List<Category> listCategory = [
+    Category(title: 'Lake', imagePath: 'category1'),
+    Category(title: 'Mountain', imagePath: 'category1')
+  ];
+
+  ScrollController controller = ScrollController();
+  ScrollController _controller = ScrollController();
+
+  List<Recommend> listRecommend = [
+    Recommend(
+        name: 'Lockness Lake',
+        location: 'USA',
+        imgPath: 'recommend1',
+        viewers: '4.8k'),
+    Recommend(
+        name: 'Ice Mountain',
+        location: 'Russia',
+        imgPath: 'recommend2',
+        viewers: '4.8k'),
+  ];
+  int currentIndex = 0;
+
+  CarouselController carouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +70,10 @@ class _HomePageBodyState extends State<HomePageBody> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [appBar(), body()],
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [appBar(), body()],
           ),
         ),
       ),
@@ -42,121 +84,480 @@ class _HomePageBodyState extends State<HomePageBody> {
     return SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // const SizedBox(
+              //   height: 8,
+              // ),
+              carousel(),
               const SizedBox(
-                height: 8,
+                height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const CustomText(
-                      message: 'Hot Camp',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary3),
-                  Row(
-                    children: [
-                      const CustomText(
-                          message: 'See more',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.primary3),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      SvgPicture.asset('assets/icons/more.svg',
-                          fit: BoxFit.none)
-                    ],
-                  )
-                ],
-              ),
+              category(),
               const SizedBox(
                 height: 16,
               ),
-              CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 16 / 13,
-                  viewportFraction: 0.7,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  // autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
-                ),
-                items: imageUrls.map((e) {
-                  return Container(
-                    width: 250,
-                    height: 300,
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary3,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            e,
-                            width: 220,
-                            height: 190,
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(height: 16),
-                          const CustomText(
-                            message: 'Himalayaa mountain peak',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.colorText,
-                          ),
-                          SizedBox(height: 2),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/location.svg',
-                                fit: BoxFit.none,
-                              ),
-                              SizedBox(width: 2),
-                              const CustomText(
-                                message: 'Himalayan',
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.colorText,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 2),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/star.svg',
-                                fit: BoxFit.none,
-                              ),
-                              SizedBox(width: 2),
-                              const CustomText(
-                                message: '4.5  ',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.colorText,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
+              recommend(),
+              const SizedBox(
+                height: 16,
               ),
+              guide(),
             ],
           ),
         ));
+  }
+
+  Padding guide() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomText(
+              message: 'Guild to help you',
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: AppColors.neutral09),
+          MasonryGridView.builder(
+            shrinkWrap: true,
+            // crossAxisCount: 16,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
+            itemCount: listGuideModel.length,
+            itemBuilder: (context, index) {
+              GuideModel guideModel = listGuideModel[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    // width: 100,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Image.asset(
+                      // height: index * 0.1,
+                      height: index.isOdd ? 190 : 300,
+                      width: 190,
+                      'assets/images/${guideModel.imgPath}.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  CustomText(
+                    message: guideModel.title,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.neutral08,
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    guideModel.description,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.neutral08,
+                    ),
+                  ),
+                ],
+              );
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Container recommend() {
+    return Container(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Recommend for you',
+                    style: TextStyle(
+                        color: AppColors.neutral09,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700)),
+              ],
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: listRecommend.length,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  Recommend recommend = listRecommend[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Container(
+                      width: 400,
+                      height: 230,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                  'assets/images/${recommend.imgPath}.png'))),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 13, vertical: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              recommend.name,
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  color: AppColors.colorText,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            const SizedBox(height: 2),
+                            Row(
+                              children: [
+                                SvgPicture.asset('assets/icons/location.svg'),
+                                const SizedBox(width: 2),
+                                Text(
+                                  recommend.location,
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      color: AppColors.colorText,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 2),
+                            Row(
+                              children: [
+                                SvgPicture.asset('assets/icons/star.svg'),
+                                const SizedBox(width: 2),
+                                Text(
+                                  '${recommend.viewers} (reviewer)',
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      color: AppColors.colorText,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                })
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container category() {
+    return Container(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Categories',
+                    style: TextStyle(
+                        color: AppColors.neutral09,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700)),
+                Row(
+                  children: [
+                    const Text('See more',
+                        style: TextStyle(
+                            color: AppColors.neutral06,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400)),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    SvgPicture.asset('assets/icons/more.svg',
+                        color: AppColors.neutral06),
+                  ],
+                )
+              ],
+            ),
+            Container(
+              height: 100,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  controller: controller,
+                  shrinkWrap: true,
+                  itemCount: listCategory.length,
+                  itemBuilder: (context, index) {
+                    Category e = listCategory[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 200,
+                            height: 100,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                      'assets/images/${e.imagePath}.png',
+                                    ),
+                                    fit: BoxFit.cover)),
+                          ),
+                          Container(
+                            height: 100,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.black.withOpacity(0.6),
+                                  Colors.transparent
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 40.0, bottom: 40.0, left: 16),
+                              child: CustomText(
+                                  message: e.title,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.neutralWhite),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container carousel() {
+    return Container(
+      width: double.infinity,
+      // height: double.infinity,
+      color: Colors.white,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Hot Camp',
+                    style: TextStyle(
+                        color: AppColors.primary3,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700)),
+                Row(
+                  children: [
+                    const Text('See more',
+                        style: TextStyle(
+                            color: AppColors.primary3,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400)),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    SvgPicture.asset('assets/icons/more.svg')
+                  ],
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          CarouselSlider(
+            carouselController: carouselController,
+            options: CarouselOptions(
+              aspectRatio: 19 / 14.2,
+              viewportFraction: 0.55,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              // autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 3),
+              autoPlayAnimationDuration: const Duration(milliseconds: 800),
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            ),
+            items: imageUrls.map((e) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return currentIndex == imageUrls.indexOf(e)
+                      ? Container(
+                          // width: 250,
+                          // height: 200,
+                          decoration: const BoxDecoration(
+                            color: AppColors.primary3,
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      topRight: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8)),
+                                  child: Image.asset(
+                                    e, width: 230, height: 200,
+                                    fit: BoxFit.cover,
+                                    // fit: BoxFit.contain,
+                                    // fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                const Text(
+                                  'Himalayaa mountain peak',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: AppColors.colorText,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                const SizedBox(height: 2),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/icons/location.svg'),
+                                    const SizedBox(width: 2),
+                                    const Text(
+                                      'Himalayan',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: AppColors.colorText,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 2),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset('assets/icons/star.svg'),
+                                    const SizedBox(width: 2),
+                                    const Text(
+                                      '4.5  ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: AppColors.colorText,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Stack(
+                          children: [
+                            Container(
+                              width: 180,
+                              height: 250,
+                              decoration: const BoxDecoration(
+                                color: AppColors.primary3,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 180,
+                                      height: 150,
+                                      child: Image.asset(
+                                        e,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: Text(
+                                        'Himalayaa mountain peak',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: AppColors.colorText,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/icons/location.svg'),
+                                          const SizedBox(width: 2),
+                                          const Text(
+                                            'Himalayan',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: AppColors.colorText,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 250,
+                              width: 180,
+                              color: Colors.white.withOpacity(0.5),
+                            )
+                          ],
+                        );
+                },
+              );
+            }).toList(),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget appBar() {
