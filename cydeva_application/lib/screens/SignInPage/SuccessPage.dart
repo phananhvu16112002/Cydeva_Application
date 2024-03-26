@@ -1,6 +1,7 @@
 import 'package:cydeva_application/common/Colors/AppColors.dart';
 import 'package:cydeva_application/common/bases/CustomButton.dart';
 import 'package:cydeva_application/common/bases/CustomText.dart';
+import 'package:cydeva_application/screens/HomePage/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +51,10 @@ class _SuccessPageState extends State<SuccessPage> {
                   backgroundColorButton: AppColors.primary3,
                   borderColor: Colors.transparent,
                   textColor: Colors.white,
-                  function: () {},
+                  function: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (builder) => HomePage()));
+                  },
                   height: 52,
                   width: 342,
                   fontSize: 16,

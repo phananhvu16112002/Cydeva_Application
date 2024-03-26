@@ -1,7 +1,9 @@
 import 'package:cydeva_application/screens/SignInPage/Welcome.dart';
 import 'package:cydeva_application/common/Colors/AppColors.dart';
 import 'package:cydeva_application/common/bases/CustomText.dart';
+import 'package:cydeva_application/screens/SignInPage/bloc/signin_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,8 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (builder) => const WelcomePage()));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (builder) => BlocProvider(
+                    create: (context) => SigninBloc(),
+                    child: const WelcomePage(),
+                  )));
     });
   }
 

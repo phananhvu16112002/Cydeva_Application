@@ -19,6 +19,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   String title = 'Welcome Back! Glad to see you, Again!';
+  String error = '';
   final _formKey = GlobalKey<FormState>();
   TextEditingController phoneNumberController = TextEditingController();
   @override
@@ -70,8 +71,9 @@ class _WelcomePageState extends State<WelcomePage> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Phone number is required';
+                            } else {
+                              return null;
                             }
-                            return null;
                           },
                           onChanged: (value) {
                             context
@@ -79,6 +81,38 @@ class _WelcomePageState extends State<WelcomePage> {
                                 .add(PhoneNumberChanged(phoneNumber: value));
                           },
                         ),
+                        // TextFormField(
+                        //   controller: phoneNumberController,
+                        //   decoration: InputDecoration(
+                        //       // isDense: true,
+                        //       hintStyle: TextStyle(
+                        //           color: AppColors.neutral05, fontSize: 16),
+                        //       border: const OutlineInputBorder(
+                        //           borderSide: BorderSide(
+                        //               width: 1, color: AppColors.borderColor),
+                        //           borderRadius:
+                        //               BorderRadius.all(Radius.circular(8))),
+                        //       contentPadding: const EdgeInsets.all(20),
+                        //       suffixIcon:
+                        //           IconButton(onPressed: null, icon: Icon(null)),
+                        //       hintText: "Phone number", // change here hinttext
+                        //       enabledBorder: const OutlineInputBorder(
+                        //           borderRadius:
+                        //               BorderRadius.all(Radius.circular(8)),
+                        //           borderSide: BorderSide(
+                        //               width: 1, color: AppColors.borderColor)),
+                        //       focusedBorder: const OutlineInputBorder(
+                        //         borderRadius:
+                        //             BorderRadius.all(Radius.circular(8)),
+                        //         borderSide: BorderSide(
+                        //             width: 1, color: AppColors.borderColor),
+                        //       )),
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) {
+                        //       return 'Alo alo';
+                        //     }
+                        //   },
+                        // ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -97,7 +131,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                                 value:
                                                     BlocProvider.of<SigninBloc>(
                                                         context),
-                                                child: TestPage())));
+                                                child: OTPPage())));
                               }
                             },
                             height: 52,

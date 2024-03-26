@@ -101,7 +101,7 @@ class _HomePageBodyState extends State<HomePageBody> {
               ),
               recommend(),
               const SizedBox(
-                height: 16,
+                height: 8,
               ),
               guide(),
             ],
@@ -172,6 +172,9 @@ class _HomePageBodyState extends State<HomePageBody> {
                 ],
               );
             },
+          ),
+          const SizedBox(
+            height: 25,
           )
         ],
       ),
@@ -299,6 +302,9 @@ class _HomePageBodyState extends State<HomePageBody> {
                 )
               ],
             ),
+            const SizedBox(
+              height: 8,
+            ),
             Container(
               height: 100,
               child: ListView.builder(
@@ -365,6 +371,9 @@ class _HomePageBodyState extends State<HomePageBody> {
       color: Colors.white,
       child: Column(
         children: [
+          const SizedBox(
+            height: 8,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Row(
@@ -397,7 +406,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           CarouselSlider(
             carouselController: carouselController,
             options: CarouselOptions(
-              aspectRatio: 19 / 14.2,
+              aspectRatio: 13.8 / 10.3,
               viewportFraction: 0.55,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -423,7 +432,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                           // height: 200,
                           decoration: const BoxDecoration(
                             color: AppColors.primary3,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(15),

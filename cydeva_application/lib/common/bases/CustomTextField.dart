@@ -35,39 +35,37 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(8)),
-      child: TextFormField(
-        readOnly: readOnly,
-        controller: controller,
-        keyboardType: textInputType,
-        style: const TextStyle(
-            color: AppColors.primaryText,
-            fontWeight: FontWeight.normal,
-            fontSize: 15),
-        obscureText: obscureText,
-        decoration: InputDecoration(
-            hintStyle: TextStyle(color: colorHintText, fontSize: 16),
-            border: const OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: AppColors.borderColor),
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-            contentPadding: const EdgeInsets.all(20),
-            suffixIcon: suffixIcon,
-            hintText: hintText, // change here hinttext
-            enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                borderSide: BorderSide(width: 1, color: AppColors.borderColor)),
-            focusedBorder: const OutlineInputBorder(
+    return TextFormField(
+      // cursorColor: Colors.black,
+      readOnly: readOnly,
+      controller: controller,
+      keyboardType: textInputType,
+      style: const TextStyle(
+          color: AppColors.primaryText,
+          fontWeight: FontWeight.normal,
+          fontSize: 15),
+      obscureText: obscureText,
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          // isDense: true,
+          hintStyle: TextStyle(color: colorHintText, fontSize: 16),
+          border: const OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: AppColors.neutral05),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+          contentPadding: const EdgeInsets.all(20),
+          suffixIcon: suffixIcon,
+          hintText: hintText, // change here hinttext
+          enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
-              borderSide: BorderSide(width: 1, color: AppColors.borderColor),
-            )),
-        validator: validator,
-        onSaved: onSaved,
-        onChanged: onChanged,
-      ),
+              borderSide: BorderSide(width: 1, color: AppColors.primary3)),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(width: 1, color: AppColors.neutral05),
+          )),
+      validator: validator,
+      onSaved: onSaved,
+      onChanged: onChanged,
     );
   }
 }

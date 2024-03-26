@@ -30,17 +30,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.backGroundColor,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          isExtended: true,
-          shape: const CircleBorder(eccentricity: 0.9),
-          elevation: 1,
-          onPressed: () {},
-          child: Image.asset(
-            'assets/images/Splash.png',
-            width: 65,
-            height: 55,
-            fit: BoxFit.fill,
+        floatingActionButton: Container(
+          width: 60,
+          height: 65,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: AppColors.primary3),
+          child: Center(
+            child: SvgPicture.asset(
+              'assets/icons/floatingactionbutton.svg',
+              fit: BoxFit.fitHeight,
+            ),
           ),
         ),
         floatingActionButtonLocation:

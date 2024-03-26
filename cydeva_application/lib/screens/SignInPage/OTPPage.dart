@@ -144,7 +144,7 @@ class _OTPPageState extends State<OTPPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                        'Resend the code after 0$minutesRemaining:${secondsRemaining}0')
+                        'Resend the code after 0$minutesRemaining:${secondsRemaining} ')
                   ],
                 ),
                 const SizedBox(height: 16),
