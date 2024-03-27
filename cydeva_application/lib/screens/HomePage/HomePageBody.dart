@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cydeva_application/common/Colors/AppColors.dart';
 import 'package:cydeva_application/common/bases/CustomText.dart';
-import 'package:cydeva_application/common/bases/CustomTextField.dart';
 import 'package:cydeva_application/models/category_model.dart';
 import 'package:cydeva_application/models/guilde_model.dart';
 import 'package:cydeva_application/models/recommend_model.dart';
@@ -28,16 +27,20 @@ class _HomePageBodyState extends State<HomePageBody> {
     GuideModel(
         title: 'Enjoy your trip',
         description: 'Tips to help you have memory',
-        imgPath: 'guide'),
+        imgPath: 'guide',
+        subTitle: ''),
     GuideModel(
         title: 'Tool preparation',
         description: 'What tools you need to prep',
-        imgPath: 'guide3'),
+        imgPath: 'guide3',
+        subTitle: ''),
     GuideModel(
         title: 'Travel articles',
         description: 'Tips to help you have memoryasdasdasdasdsadadasdas',
-        imgPath: 'guide4'),
-    GuideModel(title: '', description: '', imgPath: 'guide2'),
+        imgPath: 'guide4',
+        subTitle: ''),
+    GuideModel(
+        title: '', description: '', imgPath: 'guide2', subTitle: 'Make a plan'),
   ];
 
   List<Category> listCategory = [
@@ -46,7 +49,6 @@ class _HomePageBodyState extends State<HomePageBody> {
   ];
 
   ScrollController controller = ScrollController();
-  ScrollController _controller = ScrollController();
 
   List<Recommend> listRecommend = [
     Recommend(
@@ -88,9 +90,6 @@ class _HomePageBodyState extends State<HomePageBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // const SizedBox(
-              //   height: 8,
-              // ),
               carousel(),
               const SizedBox(
                 height: 10,
@@ -122,7 +121,6 @@ class _HomePageBodyState extends State<HomePageBody> {
               color: AppColors.neutral09),
           MasonryGridView.builder(
             shrinkWrap: true,
-            // crossAxisCount: 16,
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
@@ -134,19 +132,28 @@ class _HomePageBodyState extends State<HomePageBody> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    // width: 100,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Image.asset(
-                      // height: index * 0.1,
-                      height: index.isOdd ? 190 : 300,
-                      width: 190,
-                      'assets/images/${guideModel.imgPath}.png',
-                      fit: BoxFit.cover,
-                    ),
+                  Stack(
+                    children: [
+                      Container(
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Image.asset(
+                          'assets/images/${guideModel.imgPath}.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        top: 80,
+                        left: 25,
+                        child: CustomText(
+                            message: guideModel.subTitle,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.neutralWhite),
+                      )
+                    ],
                   ),
                   const SizedBox(
                     height: 2,
@@ -174,7 +181,7 @@ class _HomePageBodyState extends State<HomePageBody> {
             },
           ),
           const SizedBox(
-            height: 25,
+            height: 30,
           )
         ],
       ),
@@ -202,7 +209,7 @@ class _HomePageBodyState extends State<HomePageBody> {
             ListView.builder(
                 shrinkWrap: true,
                 itemCount: listRecommend.length,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   Recommend recommend = listRecommend[index];
                   return Padding(
@@ -367,7 +374,6 @@ class _HomePageBodyState extends State<HomePageBody> {
   Container carousel() {
     return Container(
       width: double.infinity,
-      // height: double.infinity,
       color: Colors.white,
       child: Column(
         children: [
@@ -428,8 +434,6 @@ class _HomePageBodyState extends State<HomePageBody> {
                 builder: (BuildContext context) {
                   return currentIndex == imageUrls.indexOf(e)
                       ? Container(
-                          // width: 250,
-                          // height: 200,
                           decoration: const BoxDecoration(
                             color: AppColors.primary3,
                             borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -447,8 +451,6 @@ class _HomePageBodyState extends State<HomePageBody> {
                                   child: Image.asset(
                                     e, width: 230, height: 200,
                                     fit: BoxFit.cover,
-                                    // fit: BoxFit.contain,
-                                    // fit: BoxFit.cover,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -738,21 +740,7 @@ class _HomePageBodyState extends State<HomePageBody> {
             contentPadding: const EdgeInsets.all(20),
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            hintText: hintText, // change here hinttext
-            // label: const SizedBox(
-            //   width: 188,
-            //   height: 40,
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       CustomText(
-            //           message: 'Where are you going ?',
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w600,
-            //           color: AppColors.neutral06),
-            //     ],
-            //   ),
-            // ),
+            hintText: hintText, 
             enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32)),
                 borderSide: BorderSide(width: 1, color: AppColors.borderColor)),

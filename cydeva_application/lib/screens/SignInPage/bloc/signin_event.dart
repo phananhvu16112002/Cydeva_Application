@@ -10,3 +10,13 @@ class PhoneNumberChanged extends SigninEvent {
 class SignInSubmiited extends SigninEvent {
   SignInSubmiited();
 }
+
+class VerifySubmitted extends SigninEvent {
+  String otpNumber = '';
+  VerifySubmitted({required this.otpNumber});
+}
+
+class OTPNumberChanged extends SigninEvent {
+  String otpNumber = '';
+  OTPNumberChanged({required this.otpNumber});
+}

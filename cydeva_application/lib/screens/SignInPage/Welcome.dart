@@ -4,7 +4,6 @@ import 'package:cydeva_application/common/bases/CustomButton.dart';
 import 'package:cydeva_application/common/bases/CustomText.dart';
 import 'package:cydeva_application/common/bases/CustomTextField.dart';
 import 'package:cydeva_application/screens/SignInPage/bloc/signin_bloc.dart';
-import 'package:cydeva_application/screens/Test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,38 +80,6 @@ class _WelcomePageState extends State<WelcomePage> {
                                 .add(PhoneNumberChanged(phoneNumber: value));
                           },
                         ),
-                        // TextFormField(
-                        //   controller: phoneNumberController,
-                        //   decoration: InputDecoration(
-                        //       // isDense: true,
-                        //       hintStyle: TextStyle(
-                        //           color: AppColors.neutral05, fontSize: 16),
-                        //       border: const OutlineInputBorder(
-                        //           borderSide: BorderSide(
-                        //               width: 1, color: AppColors.borderColor),
-                        //           borderRadius:
-                        //               BorderRadius.all(Radius.circular(8))),
-                        //       contentPadding: const EdgeInsets.all(20),
-                        //       suffixIcon:
-                        //           IconButton(onPressed: null, icon: Icon(null)),
-                        //       hintText: "Phone number", // change here hinttext
-                        //       enabledBorder: const OutlineInputBorder(
-                        //           borderRadius:
-                        //               BorderRadius.all(Radius.circular(8)),
-                        //           borderSide: BorderSide(
-                        //               width: 1, color: AppColors.borderColor)),
-                        //       focusedBorder: const OutlineInputBorder(
-                        //         borderRadius:
-                        //             BorderRadius.all(Radius.circular(8)),
-                        //         borderSide: BorderSide(
-                        //             width: 1, color: AppColors.borderColor),
-                        //       )),
-                        //   validator: (value) {
-                        //     if (value!.isEmpty) {
-                        //       return 'Alo alo';
-                        //     }
-                        //   },
-                        // ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -121,7 +88,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             backgroundColorButton: AppColors.primaryButton,
                             borderColor: Colors.white,
                             textColor: Colors.white,
-                            function: () {
+                            function: () async {
                               if (_formKey.currentState!.validate()) {
                                 Navigator.push(
                                     context,

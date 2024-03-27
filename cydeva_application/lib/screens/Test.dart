@@ -27,7 +27,7 @@ class _TestPageState extends State<TestPage> {
           child: BlocBuilder<SigninBloc, SigninState>(
             bloc: _signinBloc,
             builder: (context, state) {
-              return Text('Phone:${state.phoneNumber}');
+              return Center(child: Image.asset('assets/images/guide2.png'));
             },
           ),
         ),
