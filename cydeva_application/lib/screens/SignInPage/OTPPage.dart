@@ -313,14 +313,19 @@ class _OTPPageState extends State<OTPPage> {
       width: 342,
       height: 32,
       color: AppColors.backGroundColor,
-      child: const Row(
+      child: Row(
         children: [
-          Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.gray,
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.gray,
+            ),
           ),
-          SizedBox(width: 5), // Add some space between the icon and text
-          Text('Back')
+          const SizedBox(width: 5),
+          const Text('Back')
         ],
       ),
     );

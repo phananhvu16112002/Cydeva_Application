@@ -1,3 +1,4 @@
+import 'package:cydeva_application/screens/FlashPage/SplashScreen.dart';
 import 'package:cydeva_application/screens/HomePage/HomePage.dart';
 import 'package:cydeva_application/screens/SignInPage/bloc/signin_bloc.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
       home: BlocProvider(
         create: (context) => SigninBloc(),
-        child: const HomePage(),
+        child: const SplashScreen(),
       ),
     );
   }

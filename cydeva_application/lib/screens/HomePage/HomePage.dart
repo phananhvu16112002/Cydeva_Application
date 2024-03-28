@@ -56,7 +56,11 @@ class _HomePageState extends State<HomePage> {
                       width: 24,
                       height: 24,
                       child: SvgPicture.asset(listBottomNav[index].svgPath,
-                          width: 24, height: 24)),
+                          width: 24,
+                          height: 24,
+                          color: isActive
+                              ? AppColors.primary3
+                              : AppColors.primaryText)),
                   Text(
                     listBottomNav[index].title,
                     style: TextStyle(

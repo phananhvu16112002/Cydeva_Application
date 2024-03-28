@@ -210,6 +210,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                 shrinkWrap: true,
                 itemCount: listRecommend.length,
                 physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(top: 8),
                 itemBuilder: (context, index) {
                   Recommend recommend = listRecommend[index];
                   return Padding(
@@ -280,12 +281,12 @@ class _HomePageBodyState extends State<HomePageBody> {
   Container category() {
     return Container(
       width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Categories',
@@ -309,21 +310,24 @@ class _HomePageBodyState extends State<HomePageBody> {
                 )
               ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Container(
-              height: 100,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: controller,
-                  shrinkWrap: true,
-                  itemCount: listCategory.length,
-                  itemBuilder: (context, index) {
-                    Category e = listCategory[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 5, left: 5),
-                      child: Stack(
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Container(
+            height: 100,
+            child: Row(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(left: 24),
+                    itemCount: listCategory.length,
+                    itemBuilder: (context, index) {
+                      Category e = listCategory[index];
+                      return Stack(
                         children: [
                           Container(
                             width: 200,
@@ -361,12 +365,19 @@ class _HomePageBodyState extends State<HomePageBody> {
                             ),
                           )
                         ],
-                      ),
-                    );
-                  }),
-            )
-          ],
-        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: 16,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -412,7 +423,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           CarouselSlider(
             carouselController: carouselController,
             options: CarouselOptions(
-              aspectRatio: 13.8 / 10.3,
+              aspectRatio: 14.2 / 10.3,
               viewportFraction: 0.55,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -449,7 +460,9 @@ class _HomePageBodyState extends State<HomePageBody> {
                                       topRight: Radius.circular(8),
                                       bottomLeft: Radius.circular(8)),
                                   child: Image.asset(
-                                    e, width: 230, height: 200,
+                                    e,
+                                    width: 230,
+                                    height: 200,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -591,7 +604,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 50,
+              height: 55,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -633,57 +646,61 @@ class _HomePageBodyState extends State<HomePageBody> {
             ),
             Row(
               children: [
-                Container(
-                  width: 290,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      color: AppColors.neutralWhite,
-                      borderRadius: const BorderRadius.all(Radius.circular(32)),
-                      border: Border.all(color: AppColors.borderColor)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/search.svg',
-                        fit: BoxFit.none,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                              message: 'Where are you going',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.neutral06),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          CustomText(
-                              message: 'Explore new lands, conquer big...',
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.neutral05),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/mic.svg',
-                        fit: BoxFit.none,
-                      ),
-                    ],
+                Expanded(
+                  child: Container(
+                    // width: 290,
+                    height: 55,
+                    decoration: BoxDecoration(
+                        color: AppColors.neutralWhite,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(32)),
+                        border: Border.all(color: AppColors.borderColor)),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.spaceA,
+                      children: [
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/search.svg',
+                          fit: BoxFit.none,
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(
+                                message: 'Where are you going',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.neutral06),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            CustomText(
+                                message: 'Explore new lands, conquer big...',
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.neutral05),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/mic.svg',
+                          fit: BoxFit.none,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(
-                  width: 30,
+                  width: 40,
                 ),
                 Container(
                     height: 42,
@@ -740,7 +757,7 @@ class _HomePageBodyState extends State<HomePageBody> {
             contentPadding: const EdgeInsets.all(20),
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            hintText: hintText, 
+            hintText: hintText,
             enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32)),
                 borderSide: BorderSide(width: 1, color: AppColors.borderColor)),
